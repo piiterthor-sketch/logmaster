@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Log Master Logística</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#f5f7fb;
+            color:#111827;
+            overflow-x:hidden;
+        }
+
+        .container{
+            width:90%;
+            max-width:1280px;
+            margin:auto;
+        }
+
+        header{
+            width:100%;
+            position:fixed;
+            top:0;
+            left:0;
+            z-index:9999;
+            background:rgba(0,0,0,0.82);
+            backdrop-filter:blur(12px);
+        }
+
+        .nav{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:18px 0;
+        }
+
+        .logo{
+            color:white;
+            font-size:30px;
+            font-weight:800;
+            letter-spacing:1px;
+        }
+
+        nav ul{
+            display:flex;
+            gap:28px;
+            list-style:none;
+        }
+
+        nav a{
+            text-decoration:none;
+            color:white;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        nav a:hover{
+            color:#00b4ff;
+        }
+
+        .hero{
+            width:100%;
+            height:100vh;
+            position:relative;
+            overflow:hidden;
+        }
+
+        .slide{
+            position:absolute;
+            width:100%;
+            height:100%;
+            background-size:cover;
+            background-position:center;
+            opacity:0;
+            transition:opacity 1s ease-in-out;
+        }
+
+        .slide.active{
+            opacity:1;
+        }
+
+        .overlay{
+            position:absolute;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.55);
+            z-index:1;
+        }
+
+        .hero-content{
+            position:relative;
+            z-index:2;
+            height:100%;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            color:white;
+            padding:20px;
+        }
+
+        .hero-content h1{
+            font-size:68px;
+            max-width:900px;
+            margin-bottom:25px;
+            font-weight:800;
+        }
+
+        .hero-content p{
+            font-size:22px;
+            max-width:700px;
+            margin-bottom:35px;
+        }
+
+        .btn{
+            padding:16px 34px;
+            background:#00b4ff;
+            color:white;
+            text-decoration:none;
+            border-radius:14px;
+            font-weight:700;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            transform:translateY(-4px);
+        }
+
+        section{
+            padding:120px 0;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:70px;
+        }
+
+        .section-title span{
+            color:#00b4ff;
+            font-weight:700;
+            letter-spacing:2px;
+        }
+
+        .section-title h2{
+            font-size:48px;
+            margin-top:15px;
+        }
+
+        .about-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:60px;
+            align-items:center;
+        }
+
+        .about-grid img{
+            width:100%;
+            border-radius:24px;
+        }
+
+        .about-grid p{
+            line-height:1.9;
+            margin-bottom:20px;
+            color:#4b5563;
+        }
+
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+        }
+
+        .card{
+            background:white;
+            padding:40px;
+            border-radius:24px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            transition:0.3s;
+            text-align:center;
+        }
+
+        .card:hover{
+            transform:translateY(-10px);
+        }
+
+        .card i{
+            font-size:52px;
+            color:#00b4ff;
+            margin-bottom:25px;
+        }
+
+        .card h3{
+            margin-bottom:15px;
+            font-size:24px;
+        }
+
+        .card p{
+            color:#6b7280;
+            line-height:1.7;
+        }
+
+        .gray{
+            background:#eef2f7;
+        }
+
+        .transport{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:60px;
+            align-items:center;
+        }
+
+        .transport img{
+            width:100%;
+            border-radius:24px;
+        }
+
+        .transport p{
+            line-height:1.9;
+            color:#4b5563;
+        }
+
+        .cert-box{
+            background:white;
+            padding:50px;
+            border-radius:24px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .cert-box i{
+            font-size:70px;
+            color:#00b4ff;
+            margin-bottom:30px;
+        }
+
+        .jobs{
+            text-align:center;
+        }
+
+        .jobs p{
+            max-width:700px;
+            margin:auto;
+            line-height:1.9;
+            color:#4b5563;
+            margin-bottom:35px;
+        }
+
+        .contact-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:40px;
+        }
+
+        .contact-info{
+            background:white;
+            padding:40px;
+            border-radius:24px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .contact-info p{
+            margin-bottom:20px;
+            font-size:18px;
+        }
+
+        .social{
+            display:flex;
+            gap:20px;
+            margin-top:30px;
+        }
+
+        .social a{
+            width:55px;
+            height:55px;
+            background:#00b4ff;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            border-radius:50%;
+            font-size:24px;
+            text-decoration:none;
+        }
+
+        .form{
+            background:white;
+            padding:40px;
+            border-radius:24px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .form input,
+        .form textarea{
+            width:100%;
+            padding:16px;
+            margin-bottom:20px;
+            border:1px solid #d1d5db;
+            border-radius:12px;
+            font-size:16px;
+        }
+
+        .form button{
+            width:100%;
+            padding:18px;
+            border:none;
+            background:#00b4ff;
+            color:white;
+            border-radius:12px;
+            font-size:18px;
+            cursor:pointer;
+            font-weight:700;
+        }
+
+        footer{
+            background:#0f172a;
+            color:white;
+            text-align:center;
+            padding:40px 20px;
+        }
+
+        .whatsapp{
+            position:fixed;
+            bottom:25px;
+            right:25px;
+            width:70px;
+            height:70px;
+            background:#25d366;
+            border-radius:50%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            font-size:38px;
+            text-decoration:none;
+            z-index:99999;
+            box-shadow:0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        @media(max-width:900px){
+
+            nav{
+                display:none;
+            }
+
+            .hero-content h1{
+                font-size:42px;
+            }
+
+            .about-grid,
+            .transport,
+            .contact-grid{
+                grid-template-columns:1fr;
+            }
+
+            .section-title h2{
+                font-size:36px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="container nav">
+
+        <div class="logo">
+            LOG MASTER
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li><a href="#home">Home</a></li>
+
+                <li><a href="#logmaster">Log Master</a></li>
+
+                <li><a href="#servicos">Serviços</a></li>
+
+                <li><a href="#transporte">Transporte</a></li>
+
+                <li><a href="#certificacoes">Certificações</a></li>
+
+                <li><a href="#trabalhe">Trabalhe Conosco</a></li>
+
+                <li><a href="#contato">Contato</a></li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<section class="hero"
+         id="home">
+
+    <div class="slide active"
+         style="background-image:url('images/banner1.jpg')"></div>
+
+    <div class="slide"
+         style="background-image:url('images/banner2.jpg')"></div>
+
+    <div class="slide"
+         style="background-image:url('images/banner3.jpg')"></div>
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+
+        <h1>
+            Logística Moderna e Inteligente para Grandes Resultados
+        </h1>
+
+        <p>
+            Transporte, armazenagem e distribuição
+            com segurança, tecnologia e eficiência.
+        </p>
+
+        <a href="#contato"
+           class="btn">
+            Solicitar Atendimento
+        </a>
+
+    </div>
+
+</section>
+
+<section id="logmaster">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>LOG MASTER</span>
+
+            <h2>
+                Soluções modernas em logística
+            </h2>
+
+        </div>
+
+        <div class="about-grid">
+
+            <div>
+
+                <p>
+                    A Log Master atua com excelência
+                    no transporte e logística,
+                    oferecendo soluções rápidas,
+                    seguras e eficientes.
+                </p>
+
+                <p>
+                    Nossa estrutura moderna e equipe
+                    especializada garantem atendimento
+                    de alta qualidade para empresas
+                    de diversos setores.
+                </p>
+
+                <p>
+                    Trabalhamos com foco em inovação,
+                    tecnologia e compromisso com nossos clientes.
+                </p>
+
+            </div>
+
+            <img src="images/frota.jpg"
+                 alt="Logística">
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="gray"
+         id="servicos">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>SERVIÇOS</span>
+
+            <h2>
+                O que fazemos
+            </h2>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <i class="fas fa-truck"></i>
+
+                <h3>Transporte Rodoviário</h3>
+
+                <p>
+                    Transporte eficiente com monitoramento
+                    e segurança em todas as etapas.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-warehouse"></i>
+
+                <h3>Armazenagem</h3>
+
+                <p>
+                    Estrutura moderna para armazenagem
+                    e controle logístico.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-box"></i>
+
+                <h3>Distribuição</h3>
+
+                <p>
+                    Entregas rápidas e organizadas
+                    para toda a região.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="transporte">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>TRANSPORTE</span>
+
+            <h2>
+                Frota Moderna
+            </h2>
+
+        </div>
+
+        <div class="transport">
+
+            <img src="images/transporte.jpg"
+                 alt="Transporte">
+
+            <div>
+
+                <p>
+                    Veículos modernos, rastreados
+                    e preparados para garantir
+                    segurança e pontualidade.
+                </p>
+
+                <p>
+                    Nossa frota atende operações
+                    logísticas de pequeno, médio
+                    e grande porte.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="gray"
+         id="certificacoes">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>CERTIFICAÇÕES</span>
+
+            <h2>
+                Qualidade e Segurança
+            </h2>
+
+        </div>
+
+        <div class="cert-box">
+
+            <i class="fas fa-award"></i>
+
+            <h3>
+                Excelência Operacional
+            </h3>
+
+            <br>
+
+            <p>
+                A Log Master segue rigorosos padrões
+                de qualidade e segurança para garantir
+                excelência operacional em todas as operações.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="trabalhe">
+
+    <div class="container jobs">
+
+        <div class="section-title">
+
+            <span>TRABALHE CONOSCO</span>
+
+            <h2>
+                Faça Parte da Nossa Equipe
+            </h2>
+
+        </div>
+
+        <p>
+            Estamos sempre em busca de profissionais
+            comprometidos, responsáveis e apaixonados
+            por logística e transporte.
+        </p>
+
+        <a href="#contato"
+           class="btn">
+            Enviar Currículo
+        </a>
+
+    </div>
+
+</section>
+
+<section class="gray"
+         id="contato">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>CONTATO</span>
+
+            <h2>
+                Fale Conosco
+            </h2>
+
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-info">
+
+                <p>
+                    <strong>Telefone:</strong>
+                    (31) 3386-8060
+                </p>
+
+                <p>
+                    <strong>WhatsApp:</strong>
+                    (31) 98204-2464
+                </p>
+
+                <p>
+                    <strong>Instagram:</strong>
+                    @logmasterlogistica
+                </p>
+
+                <div class="social">
+
+                    <a href="https://www.instagram.com/logmasterlogistica?igsh=MXFuYTJlbHAwZWUxdw=="
+                       target="_blank">
+
+                        <i class="fab fa-instagram"></i>
+
+                    </a>
+
+                    <a href="https://wa.me/5531982042464"
+                       target="_blank">
+
+                        <i class="fab fa-whatsapp"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="form">
+
+                <form>
+
+                    <input type="text"
+                           placeholder="Nome">
+
+                    <input type="email"
+                           placeholder="E-mail">
+
+                    <input type="text"
+                           placeholder="Telefone">
+
+                    <textarea rows="6"
+                              placeholder="Mensagem"></textarea>
+
+                    <button type="submit">
+                        Enviar Mensagem
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    © 2026 Log Master Logística - Todos os direitos reservados.
+
+</footer>
+
+<a href="https://wa.me/5531982042464"
+   class="whatsapp"
+   target="_blank">
+
+    <i class="fab fa-whatsapp"></i>
+
+</a>
+
+<script>
+
+    const slides = document.querySelectorAll('.slide');
+
+    let current = 0;
+
+    function nextSlide(){
+
+        slides[current].classList.remove('active');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.add('active');
+    }
+
+    setInterval(nextSlide,2000);
+
+</script>
+
+</body>
+</html>
