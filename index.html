@@ -1,66 +1,198 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Log Master - Soluções ágeis e seguras no transporte de material biológico em Minas Gerais.">
     <title>Log Master - Soluções em Logística - MG</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#004a99',
+                            softBlue: '#6a82a7',
+                            red: '#e31e24',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Ajustes finos que são mais práticos no CSS puro do que com classes utilitárias */
+        .swiper-button-next, .swiper-button-prev {
+            color: rgba(255, 255, 255, 0.7) !important;
+            transition: color 0.3s ease;
+        }
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            color: #ffffff !important;
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+            font-size: 2rem !important;
+        }
+        
+        /* Garantindo que o elemento vermelho fique fixado à direita do container */
+        .hero-graphic-shape {
+            border-radius: 50px 0 0 50px;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <img src="logo.png" alt="Log Master Logo" class="logo-img">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#logmaster">Log Master</a></li>
-                    <li><a href="#servicos">Serviços</a></li>
-                    <li><a href="#transporte">Transporte</a></li>
-                    <li><a href="#certificacoes">Certificações</a></li>
-                    <li><a href="#trabalhe-conosco">Trabalhe Conosco</a></li>
-                    <li><a href="#contato">Contato</a></li>
+<body class="text-gray-800 bg-white font-sans antialiased overflow-x-hidden">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center max-w-[1400px]">
+            <a href="#home" class="logo focus:outline-none" aria-label="Página inicial Log Master">
+                <img src="logo.png" alt="Log Master" class="h-10 md:h-12 object-contain">
+            </a>
+            
+            <nav class="hidden md:block">
+                <ul class="flex gap-6 lg:gap-8 items-center">
+                    <li><a href="#home" class="text-brand-softBlue font-medium hover:text-brand-blue transition-colors duration-300">Home</a></li>
+                    <li><a href="#logmaster" class="text-brand-softBlue font-medium hover:text-brand-blue transition-colors duration-300">Log Master</a></li>
+                    <li><a href="#servicos" class="text-brand-softBlue font-medium hover:text-brand-blue transition-colors duration-300">Serviços</a></li>
+                    <li><a href="#transporte" class="text-brand-softBlue font-medium hover:text-brand-blue transition-colors duration-300">Transporte</a></li>
+                    <li><a href="#certificacoes" class="text-brand-softBlue font-medium hover:text-brand-blue transition-colors duration-300">Certificações</a></li>
+                    <li><a href="#trabalhe-conosco" class="text-brand-softBlue font-medium hover:text-brand-blue transition-colors duration-300">Trabalhe Conosco</a></li>
+                    <li><a href="#contato" class="text-brand-softBlue font-medium hover:text-brand-blue transition-colors duration-300">Contato</a></li>
                 </ul>
             </nav>
+
+            <button id="mobile-menu-btn" class="md:hidden text-brand-blue text-2xl focus:outline-none" aria-label="Abrir menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
+
+        <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-md">
+            <ul class="flex flex-col px-6 py-4 space-y-4">
+                <li><a href="#home" class="block text-brand-softBlue hover:text-brand-blue transition-colors">Home</a></li>
+                <li><a href="#logmaster" class="block text-brand-softBlue hover:text-brand-blue transition-colors">Log Master</a></li>
+                <li><a href="#servicos" class="block text-brand-softBlue hover:text-brand-blue transition-colors">Serviços</a></li>
+                <li><a href="#transporte" class="block text-brand-softBlue hover:text-brand-blue transition-colors">Transporte</a></li>
+                <li><a href="#certificacoes" class="block text-brand-softBlue hover:text-brand-blue transition-colors">Certificações</a></li>
+                <li><a href="#contato" class="block text-brand-softBlue hover:text-brand-blue transition-colors">Contato</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <section id="home" class="hero">
-        <div class="container hero-container">
-            <div class="hero-content">
-                <div class="red-graphic">
-                    <h2>Transporte de documentos</h2>
+    <main>
+        <section id="home" class="relative h-[70vh] lg:h-[80vh] w-full bg-gray-100">
+            <div class="swiper heroSwiper h-full w-full">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide relative flex items-end">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1580674684081-7769bc070b43?q=80&w=1920&auto=format&fit=crop');">
+                            <div class="absolute inset-0 bg-black/20"></div> </div>
+                        
+                        <div class="container relative z-10 mx-auto max-w-[1400px] h-full flex items-end justify-end pb-12 lg:pb-20 pr-0">
+                            <div class="bg-brand-red text-white py-8 pl-10 pr-6 lg:py-12 lg:pl-16 lg:pr-8 hero-graphic-shape max-w-[85%] md:max-w-[500px] shadow-xl" data-aos="fade-left" data-aos-duration="1000">
+                                <h2 class="text-3xl lg:text-[42px] font-bold leading-tight text-left">
+                                    Transportes<br>rápidos
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+                
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <section class="py-20 lg:py-28 bg-white overflow-hidden">
+            <div class="container mx-auto px-6 max-w-[1400px]">
+                <div class="flex flex-col md:flex-row items-start gap-8 lg:gap-12">
+                    
+                    <div class="flex flex-row md:flex-col gap-6" data-aos="fade-right" data-aos-duration="800">
+                        <div class="w-16 h-16 lg:w-20 lg:h-20 bg-brand-blue rounded-full flex items-center justify-center text-white text-3xl lg:text-4xl shadow-md transform hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-dna"></i>
+                        </div>
+                        <div class="w-16 h-16 lg:w-20 lg:h-20 bg-brand-red rounded-full flex items-center justify-center text-white text-3xl lg:text-4xl shadow-md transform hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-truck-medical"></i>
+                        </div>
+                    </div>
+
+                    <div class="flex-1" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+                        <h3 class="text-2xl lg:text-4xl font-bold text-brand-blue mb-6 leading-snug">
+                            Seja bem-vindo a empresa referência no transporte de material biológico!
+                        </h3>
+                        <p class="text-gray-600 text-lg leading-relaxed max-w-3xl">
+                            Nossa missão é garantir a segurança e a integridade de seus materiais biológicos durante todo o processo de transporte, com agilidade e rastreabilidade. Trabalhamos com os mais altos padrões de certificação para entregar tranquilidade e resultados.
+                        </p>
+                    </div>
+
                 </div>
             </div>
-            <div class="hero-controls">
-                <div class="prev-arrow"><i class="fas fa-chevron-left"></i></div>
-                <div class="next-arrow"><i class="fas fa-chevron-right"></i></div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <section class="welcome">
-        <div class="container welcome-container">
-            <div class="welcome-icons">
-                <div class="icon-circle"><i class="fas fa-dna"></i></div>
-                </div>
-            <div class="welcome-text">
-                <h3>Seja bem-vindo a empresa referência no transporte de material biológico!</h3>
-                <p>Nossa missão é garantir a segurança e a integridade de seus materiais biológicos durante todo o processo de transporte, com agilidade e rastreabilidade.</p>
-            </div>
-        </div>
-    </section>
-
-    <div class="floating-buttons">
-        <a href="https://wa.me/553133868060" class="float-btn whatsapp" target="_blank" title="Falar no WhatsApp">
+    <div class="fixed bottom-6 right-6 md:bottom-10 md:right-10 flex flex-col gap-4 z-50">
+        <a href="https://wa.me/553133868060" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#25d366] text-white flex items-center justify-center text-3xl shadow-lg hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-300" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="https://www.instagram.com/logmaster_/" class="float-btn instagram" target="_blank" title="Seguir no Instagram">
+        <a href="https://www.instagram.com/logmaster_/" class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-tr from-[#f09433] via-[#e6683c] to-[#bc1888] text-white flex items-center justify-center text-3xl shadow-lg hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-pink-300" target="_blank" rel="noopener noreferrer" aria-label="Seguir no Instagram">
             <i class="fab fa-instagram"></i>
         </a>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicialização do Menu Mobile
+            const btnMenu = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const menuLinks = menu.querySelectorAll('a');
+
+            btnMenu.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Fecha o menu ao clicar em um link
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            // Inicialização do Swiper.js
+            const swiper = new Swiper('.heroSwiper', {
+                loop: true,
+                effect: 'fade', // Transição mais suave e premium
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                keyboard: {
+                    enabled: true,
+                }
+            });
+
+            // Inicialização do AOS (Animate On Scroll)
+            AOS.init({
+                once: true, // A animação ocorre apenas na primeira vez que o elemento entra na tela
+                offset: 50, // Dispara a animação 50px antes do elemento aparecer
+            });
+        });
+    </script>
 </body>
 </html>
